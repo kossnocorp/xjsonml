@@ -22,6 +22,6 @@
   "scripts": {
     "test": "jest",
     "build": "rm -rf lib && tsc && prettier \"**/*.[jt]s\" --write --loglevel silent && node -e \"require('fs').writeFileSync('./lib/package.json', JSON.stringify(Object.assign(require('./package.json'), { main: 'index.js' }), null, 2))\"",
-    "prepare": "ls index.js || echo \"Can't locate package build!\" && exit 1"
+    "prepare": "ls index.js || (echo \"Can't locate package build!\" && exit 1)"
   }
 }
