@@ -1,0 +1,23 @@
+{
+  "name": "xjsonml",
+  "version": "0.1.0",
+  "description": "XJSONML toolkit",
+  "main": "index.js",
+  "repository": "https://github.com/kossnocorp/xjsonml",
+  "author": "Sasha Koss <koss@nocorp.me>",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/preset-env": "^7.3.4",
+    "@babel/preset-typescript": "^7.3.3",
+    "@types/htmlparser2": "^3.7.31",
+    "@types/jest": "^24.0.11",
+    "htmlparser2": "^3.10.1",
+    "jest": "^24.5.0"
+  },
+  "peerDependencies": {
+    "htmlparser2": "^3.10.1"
+  },
+  "scripts": {
+    "test": "jest"
+  }
+}
