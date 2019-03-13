@@ -2,7 +2,7 @@
   "name": "xjsonml",
   "version": "0.1.0",
   "description": "XJSONML toolkit",
-  "main": "index.js",
+  "main": "lib/index.js",
   "repository": "https://github.com/kossnocorp/xjsonml",
   "author": "Sasha Koss <koss@nocorp.me>",
   "license": "MIT",
@@ -12,12 +12,16 @@
     "@types/htmlparser2": "^3.7.31",
     "@types/jest": "^24.0.11",
     "htmlparser2": "^3.10.1",
-    "jest": "^24.5.0"
+    "jest": "^24.5.0",
+    "prettier": "^1.16.4",
+    "typescript": "^3.3.3333"
   },
   "peerDependencies": {
     "htmlparser2": "^3.10.1"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "build": "rm -rf lib && tsc && prettier \"**/*.[jt]s\" --write --loglevel silent && node -e \"require('fs').writeFileSync('./lib/package.json', JSON.stringify(Object.assign(require('./package.json'), { main: 'index.js' }), null, 2))\"",
+    "prepare": "ls index.js || echo \"Can't locate package build!\" && exit 1"
   }
 }
