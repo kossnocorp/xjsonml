@@ -1,7 +1,7 @@
-export type Node = [string, NodeAttributes, NodeChildren]
+export type XNode = [string, XNodeProps, XNodes]
 
-export interface NodeAttributes {
+export interface XNodeProps {
   [key: string]: string
 }
 
-export interface NodeChildren extends Array<Node | string> {}
+export interface XNodes extends Array<XNode | string> {}

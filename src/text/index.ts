@@ -1,7 +1,7 @@
-import { NodeChildren } from '../types'
+import { XNodes } from '../types'
 
 export function parseText(text: string) {
-  const tree: NodeChildren = []
+  const tree: XNodes = []
 
   splitParagraphs(text).forEach(paragraph => {
     const paragraphNodes = splitBreaks(paragraph).reduce(
@@ -10,7 +10,7 @@ export function parseText(text: string) {
           .concat(index ? [['br', {}, []]] : [])
           .concat(parseChunks(line))
       },
-      [] as NodeChildren
+      [] as XNodes
     )
 
     tree.push(['p', {}, paragraphNodes])
@@ -25,7 +25,7 @@ export function parseText(text: string) {
 const specialChunkRegEx = /(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)(?:\([-a-z0-9+&@#\/%=~_|$?!:;,.]*\)|[-a-z0-9+&@#\/%=~_|$?!:;,.])*(?:\([-a-z0-9+&@#\/%=~_|$?!:;,.]*\)|[a-z0-9+&@#\/%=~_|$])/
 
 function parseChunks(text: string) {
-  const tree: NodeChildren = []
+  const tree: XNodes = []
   let inputText = text
   while (inputText) {
     const nextIndex = inputText.search(specialChunkRegEx)

@@ -1,5 +1,5 @@
 import { Parser } from 'htmlparser2'
-import { NodeChildren, Node, NodeAttributes } from '../types'
+import { XNodes, XNode, XNodeProps } from '../types'
 
 interface AttributesWhitelist {
   [tag: string]: string[]
@@ -9,12 +9,12 @@ interface ParserOptions {
   tagsWhitelist?: string[]
   attrsWhitelist?: AttributesWhitelist
   stripTags?: string[]
-  processTag?: (tag: string, attrs: NodeAttributes) => [string, NodeAttributes]
+  processTag?: (tag: string, attrs: XNodeProps) => [string, XNodeProps]
 }
 
 export function parseHTML(input: string, options: ParserOptions = {}) {
   return new Promise((resolve, _reject) => {
-    const tree: NodeChildren = []
+    const tree: XNodes = []
     const stack = [tree]
     let skipText: boolean
 
@@ -38,7 +38,7 @@ export function parseHTML(input: string, options: ParserOptions = {}) {
             ? options.processTag(tag, filteredAttrs)
             : [tag, filteredAttrs]
 
-          const node: Node = [processedTag, processedAttrs, []]
+          const node: XNode = [processedTag, processedAttrs, []]
           stack[stack.length - 1].push(node)
           stack.push(node[2])
         },
@@ -87,7 +87,7 @@ export function parseHTML(input: string, options: ParserOptions = {}) {
 
 function filterAttrs(
   tag: string,
-  attrs: NodeAttributes,
+  attrs: XNodeProps,
   whitelist: AttributesWhitelist
 ) {
   return Object.keys(attrs).reduce(
@@ -100,6 +100,6 @@ function filterAttrs(
       }
       return acc
     },
-    {} as NodeAttributes
+    {} as XNodeProps
   )
 }
