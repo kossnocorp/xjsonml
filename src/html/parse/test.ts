@@ -1,4 +1,4 @@
-import { parseHTML } from '.'
+import parseHTML from '.'
 
 describe('parseHTML', () => {
   it('parses simple HTML', () => {
