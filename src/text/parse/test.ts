@@ -1,4 +1,4 @@
-import { parseText } from '.'
+import parseText from '.'
 
 describe('parseText', () => {
   it('parses text chunks', () => {
