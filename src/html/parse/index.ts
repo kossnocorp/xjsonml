@@ -1,5 +1,5 @@
 import { Parser } from 'htmlparser2'
-import { XNode, XNodeProps, XNodes } from '../../types'
+import { XInstruction, XNode, XNodeProps, XNodes } from '../../types'
 
 interface AttributesWhitelist {
   [tag: string]: string[]
@@ -75,6 +75,11 @@ export default function parseHTML(input: string, options: ParserOptions = {}) {
 
         onend: () => {
           resolve(tree)
+        },
+
+        onprocessinginstruction: (name, data) => {
+          const node: XInstruction = { data }
+          stack[stack.length - 1].push(node)
         }
       },
       { decodeEntities: true }

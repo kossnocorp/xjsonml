@@ -1,4 +1,4 @@
-import { XNodeProps } from '../types'
+import { XInstruction, XNodeProps } from '../types'
 
 export type PackedXNode =
   | [string, XNodeProps, ...Array<unknown>]
@@ -6,4 +6,4 @@ export type PackedXNode =
   | [string, ...Array<unknown>]
   | [string]
 
-export type PackedXNodes = Array<string | PackedXNode>
+export type PackedXNodes = Array<PackedXNode | XInstruction | string>

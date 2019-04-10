@@ -22,7 +22,7 @@ export default function formatHTML(input: XNodes): string {
   return input.reduce((htmlAcc: string, node) => {
     if (typeof node === 'string') {
       return htmlAcc + node
-    } else {
+    } else if (Array.isArray(node)) {
       const [tag, attrs, children] = node
       const attrsHTML = Object.keys(attrs)
         .reduce(
@@ -40,6 +40,9 @@ export default function formatHTML(input: XNodes): string {
           ? `${htmlOpen} />`
           : `${htmlOpen}>${formatHTML(children)}</${tag}>`)
       )
+    } else {
+      const { data } = node
+      return htmlAcc + `<${data}>`
     }
   }, '')
 }

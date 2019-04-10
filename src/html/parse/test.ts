@@ -13,6 +13,10 @@ describe('parseHTML', () => {
     )
   })
 
+  it('parses empty tags', () => {
+    return expect(parseHTML('<br />')).resolves.toEqual([['br', {}, []]])
+  })
+
   it('parses nested tags', () => {
     return expect(
       parseHTML('<div><bold>Hello</bold>, <italic>world</italic>!</div>')
@@ -22,6 +26,17 @@ describe('parseHTML', () => {
         {},
         [['bold', {}, ['Hello']], ', ', ['italic', {}, ['world']], '!']
       ]
+    ])
+  })
+
+  it('parses DOCTYPE', () => {
+    return expect(
+      parseHTML(
+        '<!DOCTYPE html><html><head></head><body>Hello, world!</body></html>'
+      )
+    ).resolves.toEqual([
+      { data: '!DOCTYPE html' },
+      ['html', {}, [['head', {}, []], ['body', {}, ['Hello, world!']]]]
     ])
   })
 

@@ -6,6 +6,7 @@ PATH := $(shell yarn bin):$(PATH)
 
 test:
 	jest
+.PHONY: test
 
 test-watch:
 	jest --watch

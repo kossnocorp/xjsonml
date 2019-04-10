@@ -4,7 +4,8 @@ import { PackedXNode, PackedXNodes } from '../types'
 export default function pack(nodes: XNodes): PackedXNodes {
   return nodes.map(
     node => {
-      if (typeof node === 'string') return node
+      // if (typeof node === 'string') return node
+      if (!Array.isArray(node)) return node
 
       const [type, props, children] = node
       const hasProps = !!Object.keys(props).length
