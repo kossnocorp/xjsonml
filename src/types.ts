@@ -8,4 +8,6 @@ export interface XInstruction {
   data: string
 }
 
-export interface XNodes extends Array<XNode | XInstruction | string> {}
+export type XNodeChild = XNode | XInstruction | string
+
+export interface XNodes extends Array<XNodeChild> {}
