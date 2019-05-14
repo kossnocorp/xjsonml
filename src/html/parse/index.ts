@@ -12,7 +12,10 @@ interface ParserOptions {
   processTag?: (tag: string, attrs: XNodeProps) => [string, XNodeProps]
 }
 
-export default function parseHTML(input: string, options: ParserOptions = {}) {
+export default function parseHTML(
+  input: string,
+  options: ParserOptions = {}
+): Promise<XNodes> {
   return new Promise((resolve, _reject) => {
     const tree: XNodes = []
     const stack = [tree]
