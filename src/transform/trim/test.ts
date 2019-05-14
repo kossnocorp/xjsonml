@@ -30,4 +30,52 @@ describe('trim', () => {
   it('returns nodes as is if there are no empty nodes', () => {
     expect(trim(['Blah blah blah'])).toEqual(['Blah blah blah'])
   })
+
+  it('keeps deep trailing empty nodes', () => {
+    expect(
+      trim([
+        ['br', {}, []],
+        [
+          'div',
+          {},
+          [
+            ['div', {}, [['br', {}, []], 'Blah']],
+            'blah',
+            ['div', {}, ['blah', ['br', {}, []]]]
+          ]
+        ],
+        ['br', {}, []]
+      ])
+    ).toEqual([
+      [
+        'div',
+        {},
+        [
+          ['div', {}, [['br', {}, []], 'Blah']],
+          'blah',
+          ['div', {}, ['blah', ['br', {}, []]]]
+        ]
+      ]
+    ])
+  })
+
+  describe('onlyStart', () => {
+    it('removes trailing empty nodes only the beginning', () => {
+      expect(
+        trim([['br', {}, []], 'Blah blah blah', ['br', {}, []]], {
+          onlyStart: true
+        })
+      ).toEqual(['Blah blah blah', ['br', {}, []]])
+    })
+  })
+
+  describe('onlyEnd', () => {
+    it('removes trailing empty nodes only the end', () => {
+      expect(
+        trim([['br', {}, []], 'Blah blah blah', ['br', {}, []]], {
+          onlyEnd: true
+        })
+      ).toEqual([['br', {}, []], 'Blah blah blah'])
+    })
+  })
 })

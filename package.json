@@ -1,6 +1,6 @@
 {
   "name": "xjsonml",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "XJSONML toolkit",
   "main": "lib/index.js",
   "repository": "https://github.com/kossnocorp/xjsonml",
